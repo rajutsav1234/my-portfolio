@@ -1,0 +1,86 @@
+/* ===== Glow Cards ===== */
+.glow-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #1b1f2a; /* dark bg for contrast */
+  color: #fff;
+  text-align: left;
+  padding: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
+}
+
+/* Glowing border */
+.glow-card::before {
+  content: "";
+  position: absolute;
+  top: -3%;
+  left: -3%;
+  width: 106%;
+  height: 106%;
+  border-radius: 22px;
+  background-image: linear-gradient(var(--rotate), #00c6c6, #20e0d0, #40f0e5, #20e0d0, #00c6c6);
+  z-index: -1;
+  animation: spin 10s linear infinite;
+  opacity: 0.35;
+  filter: blur(6px);
+  transition: opacity 0.3s ease;
+}
+
+/* Glowing blur layer */
+.glow-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  filter: blur(18px);
+  background-image: linear-gradient(var(--rotate), #00c6c6, #20e0d0, #40f0e5);
+  opacity: 0.18;
+  z-index: -2;
+  animation: spin 10s linear infinite;
+  transition: opacity 0.3s ease;
+}
+
+/* Hover State */
+.glow-card:hover {
+  transform: scale(1.04) translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+  color: #fff !important; /* always keep text white */
+}
+
+.glow-card:hover::before {
+  opacity: 0.55; /* stronger glow */
+}
+
+.glow-card:hover::after {
+  opacity: 0.28;
+}
+
+/* Text Glow Effect */
+.glow-card:hover .glow-card-subtext,
+.glow-card:hover h6,
+.glow-card:hover p {
+  text-shadow: 0 0 6px rgba(102, 224, 224, 0.6);
+}
+
+/* List Items inside Card */
+.glow-card .glow-list-item {
+  border-radius: 8px;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.glow-card .glow-list-item:hover {
+  background-color: rgba(102, 224, 224, 0.12); /* subtle cyan highlight */
+  transform: translateX(4px);
+}
+
+/* Keyframe rotation */
+@keyframes spin {
+  0% { --rotate: 0deg; }
+  100% { --rotate: 360deg; }
+}
